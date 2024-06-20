@@ -1,5 +1,5 @@
 # CuttingStockAlgorithmComparisonRH
-This project aims to compare existing attempts to minimize waste created from cutting standard length wood studs into desired cuts and quantities 
+This project aims to compare existing attempts and try new methods to minimize waste created from cutting standard length wood studs into desired cuts and quantities 
 
 There are two different sets of inputs to be evaluated: a set of 2x4 cuts and a set of 2x6 cuts
 
