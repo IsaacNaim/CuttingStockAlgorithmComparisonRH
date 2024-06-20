@@ -11,7 +11,7 @@ The input dictionaries will be pulled from an excel file stored in the repo,
 
 and output will be exported excel output file with an excel sheet for each set of inputs (2 total sheets, 2x4 and 2x6 results sheets) comparing each algorithm with the following parameters:
 
-Algorithm Name
-Description
-Standard Stud Length Used
+Algorithm Name |
+Description |
+Standard Stud Length Used |
 Waste %
