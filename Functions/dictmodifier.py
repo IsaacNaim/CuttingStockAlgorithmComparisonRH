@@ -12,3 +12,8 @@ def multiply_keys_by_1000(input_dict):
     multiplied_dict = {int(key * 1000): value for key, value in input_dict.items()}
     return multiplied_dict
 
+def convert_dict_to_Google_OR_format(input_dict):
+    listoflists = []
+    for key, value in input_dict.items():
+        listoflists.append([value,key])
+    return listoflists
