@@ -365,10 +365,13 @@ def StockCutter1D(blade_cut_length,child_rolls, parent_rolls, output_json=True, 
   # quantity of parent rolls is calculated by algorithm, so user supplied quantity doesn't matter?
   # TODO: or we can check and tell the user the user when parent roll quantity is insufficient
   parent_width = parent_rolls[0][1]
-  threshold = parent_width + (blade_cut_length*1000) #multiplied by 1000 bc did that for keys
+  threshold = parent_width + (blade_cut_length*10) #multiplied by 10 bc did that for keys
   for i, item in enumerate(child_rolls):
     if item[1] >= threshold:
-        child_rolls[i][1] = int(child_rolls[i][1] - (blade_cut_length*1000))
+        print(" ")
+        print(child_rolls[i][1])
+        print(" ")
+        child_rolls[i][1] = int(child_rolls[i][1] - (blade_cut_length*10))
 
   if not checkWidths(demands=child_rolls, parent_width=parent_width):
     return []

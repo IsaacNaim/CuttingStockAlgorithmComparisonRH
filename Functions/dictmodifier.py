@@ -1,4 +1,4 @@
-
+import math
 
 def add_blade_cut_lengths(dict1, blade_cut_length=0.125):
     """
@@ -17,3 +17,9 @@ def convert_dict_to_Google_OR_format(input_dict):
     for key, value in input_dict.items():
         listoflists.append([value,key])
     return listoflists
+
+def round_blade_cut(input_listoflists):
+    for sublist in input_listoflists:
+        sublist[1] = math.ceil(sublist[1] / 100)
+    print(input_listoflists)
+    return input_listoflists
