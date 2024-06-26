@@ -368,9 +368,6 @@ def StockCutter1D(blade_cut_length,child_rolls, parent_rolls, output_json=True, 
   threshold = parent_width + (blade_cut_length*10) #multiplied by 10 bc did that for keys
   for i, item in enumerate(child_rolls):
     if item[1] >= threshold:
-        print(" ")
-        print(child_rolls[i][1])
-        print(" ")
         child_rolls[i][1] = int(child_rolls[i][1] - (blade_cut_length*10))
 
   if not checkWidths(demands=child_rolls, parent_width=parent_width):

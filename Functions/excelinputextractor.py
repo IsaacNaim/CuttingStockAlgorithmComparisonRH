@@ -14,7 +14,7 @@ def generate_dictionaries(file_path, sheet_name):
     """
     try:
         # Read the specified sheet into a DataFrame
-        df = pd.read_excel(file_path, sheet_name=sheet_name,header=0)
+        df = pd.read_excel(file_path, sheet_name=sheet_name,header=0,nrows=76)
         
         # Create the first dictionary from columns 1 and 2
         dict1 = pd.Series(df.iloc[:, 1].values, index=df.iloc[:, 0]).dropna().to_dict()

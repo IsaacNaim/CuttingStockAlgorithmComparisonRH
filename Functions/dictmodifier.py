@@ -16,10 +16,15 @@ def convert_dict_to_Google_OR_format(input_dict):
     listoflists = []
     for key, value in input_dict.items():
         listoflists.append([value,key])
+    print('listoflist')
+    print(listoflists)
     return listoflists
 
 def round_blade_cut(input_listoflists):
-    for sublist in input_listoflists:
-        sublist[1] = math.ceil(sublist[1] / 100)
-    print(input_listoflists)
+    parent_width = 192000
+    threshold = parent_width + (0.125*1000) #multiplied by 1000 bc did that for keys
+    for i, item in enumerate(input_listoflists):
+        if item[1] >= threshold:
+            input_listoflists[i][1] = int(input_listoflists[i][1] - (0.125*1000))
     return input_listoflists
+
