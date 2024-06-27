@@ -87,4 +87,16 @@ def solve_cutting_stock(data, standard_length=192000, EPS=1e-6):
     print("Total waste:", total_waste)
     print("Waste percentage:", waste_percentage)
 
+    # Verify that the demand for each cut length is met
+    output_quantities = {length: 0 for length in lengths}
+    for roll in rolls:
+        for cut in roll:
+            output_quantities[cut] += 1
+
+    print("Output quantities:", output_quantities)
+
+    for length, quantity in zip(lengths, quantities):
+        if output_quantities[length] < quantity:
+            print(f"Warning: Demand for length {length} not met. Required: {quantity}, Produced: {output_quantities[length]}")
+
     return rolls, waste_percentage
