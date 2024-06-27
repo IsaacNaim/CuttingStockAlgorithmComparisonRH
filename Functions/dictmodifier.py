@@ -16,8 +16,6 @@ def convert_dict_to_Google_OR_format(input_dict):
     listoflists = []
     for key, value in input_dict.items():
         listoflists.append([value,key])
-    print('listoflist')
-    print(listoflists)
     return listoflists
 
 def round_blade_cut(input_listoflists):

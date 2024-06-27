@@ -3,7 +3,8 @@ from Functions.EmadGoogleOR import StockCutter1D, drawGraph
 from Functions.dictmodifier import add_blade_cut_lengths, multiply_keys_by_1000, convert_dict_to_Google_OR_format,round_blade_cut
 import typer
 from Functions.knapsacksolution import solve_cutting_stock
-
+from Functions.excelresultsoutput import write_results_to_excel
+import pandas as pd
 # Define the file path and sheet name
 file_path = 'inputfiles/comparison_results.xlsx'
 sheet_name = 'Details'
@@ -21,23 +22,33 @@ twoxfourinputs_integers_listoflists, twoxsixinputs_integers_listoflists = (conve
 twoxfourinputs_integers_listoflists, twoxsixinputs_integers_listoflists  =  (round_blade_cut(d) for d in (twoxfourinputs_integers_listoflists, twoxsixinputs_integers_listoflists))
 # Example parent rolls
 parent_rolls = [[10, 192000]]  #10 is a placeholder
+twoxfourinputs_integers_listoflists = [[value / 1000 for value in roll] for roll in twoxfourinputs_integers_listoflists]
+twoxsixinputs_integers_listoflists = [[value / 1000 for value in roll] for roll in twoxsixinputs_integers_listoflists]
+df_twoxfour = pd.DataFrame(twoxfourinputs_integers_listoflists, columns=["Quantity", "Length"])
+df_twoxsix = pd.DataFrame(twoxsixinputs_integers_listoflists, columns=["Quantity", "Length"])
+output_file_path = 'outputfiles/cutting_stock_inputs.xlsx'
 
+    # Write to Excel file
+with pd.ExcelWriter(output_file_path, engine='openpyxl') as writer:
+    df_twoxfour.to_excel(writer, sheet_name='2x4 Inputs', index=False)
+    df_twoxsix.to_excel(writer, sheet_name='2x6 Inputs', index=False)
+
+    print(f"Cutting inputs have been written to {output_file_path}")
 def main():
     # Call the StockCutter1D function with the provided child and parent rolls
     #need to debug further, it is not solving, getting stuck
     #consumed_big_rolls = StockCutter1D(blade_cut_length,twoxfourinputs_integers_listoflists, parent_rolls, output_json=False, large_model=False)
-    rolls, waste_percentage = solve_cutting_stock(twoxfourinputs_integers_listoflists)
-    rolls1, waste_percentage1 = solve_cutting_stock(twoxsixinputs_integers_listoflists)
-    rolls = [[value / 1000 for value in roll] for roll in rolls]
-    rolls1 = [[value / 1000 for value in roll] for roll in rolls1]
+    #rolls, waste_percentage = solve_cutting_stock(twoxfourinputs_integers_listoflists)
+    #rolls1, waste_percentage1 = solve_cutting_stock(twoxsixinputs_integers_listoflists)
+ 
 
     print("twoxfour")
-    print(f"Consumed big rolls: {rolls}")
-    print(f"Waste percentage: {waste_percentage:.2f}%")
-    print("twoxsix")
-    print(f"Consumed big rolls: {rolls1}")
-    print(f"Waste percentage: {waste_percentage1:.2f}%")
-
+    #print(f"Consumed big rolls: {rolls}")
+    #print(f"Waste percentage: {waste_percentage:.2f}%")
+    #print("twoxsix")
+    #print(f"Consumed big rolls: {rolls1}")
+    #print(f"Waste percentage: {waste_percentage1:.2f}%")
+    #write_results_to_excel(rolls, rolls1, waste_percentage, waste_percentage1)
     #print(f"Consumed big rolls: {consumed_big_rolls}")
 if __name__ == "__main__":
     main()
