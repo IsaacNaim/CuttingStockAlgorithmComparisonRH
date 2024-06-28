@@ -4,6 +4,7 @@ from Functions.dictmodifier import add_blade_cut_lengths, multiply_keys_by_1000,
 import typer
 from Functions.knapsacksolution import solve_cutting_stock
 from Functions.excelresultsoutput import write_results_to_excel
+from Functions.postprocessing import post_process_shortages
 import pandas as pd
 # Define the file path and sheet name
 file_path = 'inputfiles/comparison_results.xlsx'
@@ -28,12 +29,17 @@ def main():
     #consumed_big_rolls = StockCutter1D(blade_cut_length,twoxfourinputs_integers_listoflists, parent_rolls, output_json=False, large_model=False)
     rolls, waste_percentage = solve_cutting_stock(twoxfourinputs_integers_listoflists)
     #rolls1, waste_percentage1 = solve_cutting_stock(twoxsixinputs_integers_listoflists)
- 
 
     print("twoxfour")
     print(f"Consumed big rolls: {rolls}")
     print(f"Waste percentage: {waste_percentage:.2f}%")
-    rolls = [[value / 1000 for value in roll] for roll in rolls]
+    all_rolls, waste_percentage_ar = post_process_shortages(twoxfourinputs_integers_listoflists,rolls)
+    #rolls = [[value / 1000 for value in roll] for roll in rolls]
+    print(' ')
+    print(' ')
+    print('improved full')
+    print(all_rolls)
+    print(waste_percentage_ar)
 
     #print("twoxsix")
     #print(f"Consumed big rolls: {rolls1}")

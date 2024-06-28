@@ -1,7 +1,7 @@
 from gurobipy import Model, GRB, quicksum, Column
 import math
 
-def solve_cutting_stock(data, standard_length=192000, EPS=1e-6):
+def solve_cutting_stock(data, standard_length=192000, EPS=1e-12):
     print("Input data:", data)  # Debug print
 
     # Sanity check: Ensure no cut lengths exceed the standard length
